@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página con Botón</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+    }
+
+    /* Animaciones */
+    .animation-1 {
+      animation: fadeInOut 3s ease-in-out;
+    }
+
+    .animation-2 {
+      animation: rotateScale 2s linear;
+    }
+
+    .animation-3 {
+      animation: bounce 1s ease-in-out;
+    }
+
+    .animation-4 {
+      animation: colorChange 2s alternate infinite;
+    }
+
+    .animation-5 {
+      animation: slideIn 2s ease-out;
+    }
+
+    @keyframes fadeInOut {
+      0%, 100% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes rotateScale {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+      50% {
+        transform: rotate(180deg) scale(1.5);
+      }
+      100% {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-30px);
+      }
+      60% {
+        transform: translateY(-15px);
+      }
+    }
+
+    @keyframes colorChange {
+      0%, 100% {
+        background-color: #4CAF50; /* Verde */
+      }
+      50% {
+        background-color: #f44336; /* Rojo */
+      }
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <button id="myButton">Haz clic</button>
+  <div id="result"></div>
+
+  <script>
+    function getRandomAnimationClass() {
+      // Lista de clases de animación disponibles
+      var animationClasses = ['animation-1', 'animation-2', 'animation-3', 'animation-4', 'animation-5'];
+
+      // Obtener un índice aleatorio
+      var randomIndex = Math.floor(Math.random() * animationClasses.length);
+
+      // Devolver la clase de animación correspondiente al índice aleatorio
+      return animationClasses[randomIndex];
+    }
+
+    function handleClick() {
+      var resultElement = document.getElementById('result');
+      var newText = document.createTextNode('______GABUJO EL MAS GIL DEL MUNDO______');
+
+      // Limpiar clases de animación anteriores
+      resultElement.className = '';
+
+      // Agregar la clase de animación aleatoria al elemento 'result'
+      resultElement.classList.add(getRandomAnimationClass());
+      
+      // Agregar el texto al elemento 'result'
+      resultElement.appendChild(newText);
+
+      // Después de 3 segundos (3000 milisegundos), eliminar el texto y la clase de animación
+      setTimeout(function() {
+        resultElement.removeChild(newText);
+        resultElement.className = '';
+      }, 3000);
+    }
+
+    var myButton = document.getElementById('myButton');
+    myButton.addEventListener('click', handleClick);
+  </script>
+</body>
+</html>
