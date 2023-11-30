@@ -3,138 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página con Botón</title>
+  <title>Galería de Fotos</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
       align-items: center;
-      justify-content: center;
       height: 100vh;
       margin: 0;
     }
 
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
+    .photo {
+      width: 200px;
+      height: 200px;
+      margin: 10px;
       cursor: pointer;
+      transition: transform 0.3s ease-in-out;
     }
 
-    #result {
-      margin-top: 20px;
+    .photo:hover {
+      transform: scale(1.1);
     }
 
-    /* Animaciones */
-    .animation-1 {
-      animation: fadeInOut 3s ease-in-out;
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: start;
     }
 
-    .animation-2 {
-      animation: rotateScale 2s linear;
-    }
-
-    .animation-3 {
-      animation: bounce 1s ease-in-out;
-    }
-
-    .animation-4 {
-      animation: colorChange 2s alternate infinite;
-    }
-
-    .animation-5 {
-      animation: slideIn 2s ease-out;
-    }
-
-    @keyframes fadeInOut {
-      0%, 100% {
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-    }
-
-    @keyframes rotateScale {
-      0% {
-        transform: rotate(0deg) scale(1);
-      }
-      50% {
-        transform: rotate(180deg) scale(1.5);
-      }
-      100% {
-        transform: rotate(360deg) scale(1);
-      }
-    }
-
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-      }
-      40% {
-        transform: translateY(-30px);
-      }
-      60% {
-        transform: translateY(-15px);
-      }
-    }
-
-    @keyframes colorChange {
-      0%, 100% {
-        background-color: #4CAF50; /* Verde */
-      }
-      50% {
-        background-color: #f44336; /* Rojo */
-      }
-    }
-
-    @keyframes slideIn {
-      0% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(0);
-      }
+    #text {
+      margin-top: 100px;
+      color: #fff;
+      font-size: 40px;
+      text-align:start;
     }
   </style>
 </head>
 <body>
-  <button id="myButton">Haz clic</button>
-  <div id="result"></div>
+  <div id="overlay">
+    <div id="text"></div>
+  </div>
+
+  <img class="photo" src="./image/papujo.jpeg" alt="Foto 1" onclick="showText('Estuuuuuu')">
+  <img class="photo" src="./image/mamuja.jpeg" alt="Foto 2" onclick="showText('scooby doooo')">
+  <img class="photo" src="./image/kito.jpeg" alt="Foto 3" onclick="showText('El mas gil del mundo mundial')">
+  <img class="photo" src="./image/andy.jpeg" alt="Foto 4" onclick="showText('Se escapo la MICHA, otra vez >:c')">
+  <img class="photo" src="./image/nito.jpeg" alt="Foto 5" onclick="showText('El mas capo del mundo mundial')">
+  <img class="photo" src="./image/gaby.jpeg" alt="Foto 6" onclick="showText('El mas salamin del mundo mundial')">
 
   <script>
-    function getRandomAnimationClass() {
-      // Lista de clases de animación disponibles
-      var animationClasses = ['animation-1', 'animation-2', 'animation-3', 'animation-4', 'animation-5'];
+    function showText(text) {
+      var overlay = document.getElementById('overlay');
+      var textElement = document.getElementById('text');
 
-      // Obtener un índice aleatorio
-      var randomIndex = Math.floor(Math.random() * animationClasses.length);
+      overlay.style.display = 'flex';
 
-      // Devolver la clase de animación correspondiente al índice aleatorio
-      return animationClasses[randomIndex];
-    }
+      textElement.innerHTML = text;
 
-    function handleClick() {
-      var resultElement = document.getElementById('result');
-      var newText = document.createTextNode('______GABUJO EL MAS GIL DEL MUNDO______');
-
-      // Limpiar clases de animación anteriores
-      resultElement.className = '';
-
-      // Agregar la clase de animación aleatoria al elemento 'result'
-      resultElement.classList.add(getRandomAnimationClass());
-      
-      // Agregar el texto al elemento 'result'
-      resultElement.appendChild(newText);
-
-      // Después de 3 segundos (3000 milisegundos), eliminar el texto y la clase de animación
       setTimeout(function() {
-        resultElement.removeChild(newText);
-        resultElement.className = '';
+        overlay.style.display = 'none';
       }, 3000);
     }
-
-    var myButton = document.getElementById('myButton');
-    myButton.addEventListener('click', handleClick);
   </script>
 </body>
 </html>
